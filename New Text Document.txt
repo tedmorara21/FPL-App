@@ -1,0 +1,15 @@
+app where you can continue saving until you want to cashout
+
+910504 - Guzuu's Id in fpl
+
+fpl api - https://fantasy.premierleague.com/api/entry/{User_id}/
+
+Objectives
+-fetch user data from fpls site
+-integrate mpesa API's to authorize transactions 
+-logins for admin and the users
+-record transactions
+-record user points
+-store user and admin credentials
+-properly store user balance(in terms of payment)
+
