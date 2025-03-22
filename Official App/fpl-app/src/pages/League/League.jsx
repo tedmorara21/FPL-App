@@ -36,7 +36,7 @@ const League = () => {
 
         <div>
         <h1>🏆 Fantasy League Standings</h1>
-
+{/*
         <ul>
           {users.map((user) => (
             <li key={user.entry}>
@@ -44,7 +44,34 @@ const League = () => {
             </li>
           ))}
         </ul>
-        
+*/}
+
+        <table border="1">
+          <thead>
+            <tr>
+              <th> Rank </th>
+              <th> Name </th>
+              <th> Points </th>
+              <th> Earned This Gw </th>
+              <th> Total Points </th>
+              <th> Total Money Earned </th>
+            </tr>
+          </thead>
+
+          <tbody>
+        {users.map((user) => (
+          <tr key={user.entry}>
+            <td>{user.rank}</td> {/* Rank */}
+            <td>{user.entry_name}</td> {/* Name */}
+            <td>{user.event_total}</td> {/* Points */}
+            <td>{0.00}</td> {/* Earned This Gw */}
+            <td>{user.total}</td> {/* Total Points */}
+            <td>{0.00}</td> {/* Total Money Earned */}
+          </tr>
+        ))}
+      </tbody>
+        </table>
+
         </div>
       </>
    );
