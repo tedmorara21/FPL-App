@@ -6,6 +6,9 @@ body {
 .dashboard-body {
    text-align: center;
    font-size: 20px;
+
+   position: relative;
+   width: 100%;
 }
 
 h1 {

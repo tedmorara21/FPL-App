@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
+import HomeButton from "../../components/HomeButton/HomeButton.jsx";
 import { getLeagueStandings } from "../../api/league-api.js";
 import "./League.css";
 
@@ -34,7 +35,9 @@ const League = () => {
       <>
         <ProfileHeader name={"Ted"} balance={1000} points={1783}/>
 
-        <div>
+        <div className="league-body"> 
+
+          <HomeButton />
         <h1>🏆 Fantasy League Standings</h1>
 {/*
         <ul>

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
+import HomeButton from "../../components/HomeButton/HomeButton";
 import "./Dashboard.css"
 
 const Dashboard = () => {
@@ -9,6 +10,10 @@ const Dashboard = () => {
    return (
      <>
      <div class="dashboard-body">
+        <div>
+            <HomeButton />
+        </div>
+
        <h1>DASHBOARD</h1>
        <p class="dashboard-welcome">Welcome to your dashboard <span className="highlight"> TEAMNAME </span>!</p>
        <>

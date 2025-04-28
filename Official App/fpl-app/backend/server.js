@@ -9,7 +9,7 @@ app.use(cors({
    allowedHeaders: ["Content-Type"]
  })); // Enable CORS
 
-const API_URL = "https://fantasy.premierleague.com/api/leagues-classic/697909/standings/";
+const API_URL = "https://fantasy.premierleague.com/api/leagues-classic/697909/standings/"; // 697909 for the specific league
 
 //Proxy endpoint
 
