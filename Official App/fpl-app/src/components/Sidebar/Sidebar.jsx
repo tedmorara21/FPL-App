@@ -24,7 +24,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/settings" className="sidebar-link">
+          <Link to="/login" className="sidebar-link">
             <FiLogOut className="icon" /> Logout
           </Link>
         </li>

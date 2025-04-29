@@ -5,7 +5,7 @@ const API_URL = "http://192.168.100.2:5001/api/league"; //local proxy
 //Function to get users
 export const getLeagueStandings = async () => {
    try {
-      console.log("Fetching data from:", API_URL);
+      // console.log("Fetching data from:", API_URL);
       const response = await axios.get(API_URL);
 
       console.log("Full API Response: ", response);

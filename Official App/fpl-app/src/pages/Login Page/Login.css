@@ -1,0 +1,15 @@
+.login-body {
+   text-align: center;
+   font-size: 20px;
+
+   position: relative;
+   width: 100%;
+}
+
+.yes-button {
+   background-color: red;
+}
+
+.no-button {
+   background-color: green;
+}
