@@ -8,6 +8,7 @@ import League from './pages/League/League.jsx';
 import Balance from "./pages/Balance/Balance.jsx";
 import Login from "./pages/Login Page/Login.jsx";
 import LandingPage from './pages/Landing Page/LandingPage.jsx';
+import NewRegistration from './pages/New Registration/NewRegistration.jsx';
 
 function App() {
   const location = useLocation();
@@ -28,11 +29,12 @@ function App() {
       {/* Main Content */}
       <div className="main-content">
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/league" element={<League />} />
-          <Route path="/balance" element={<Balance />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={< LandingPage />} />
+          <Route path="/dashboard" element={< Dashboard />} />
+          <Route path="/league" element={< League />} />
+          <Route path="/balance" element={< Balance />} />
+          <Route path="/login" element={< Login />} />
+          <Route path="/new-registration" element={< NewRegistration />} />
         </Routes>
       </div>
     </div>

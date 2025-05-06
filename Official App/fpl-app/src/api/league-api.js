@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://192.168.100.2:5001/api/league"; //local proxy
+const API_URL = "http://192.168.100.3:5001/api/league"; //local proxy
 
 //Function to get users
 export const getLeagueStandings = async () => {

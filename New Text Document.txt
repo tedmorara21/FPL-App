@@ -13,3 +13,8 @@ Objectives
 -store user and admin credentials
 -properly store user balance(in terms of payment)
 
+- Upload to GitHub
+- MongoDB for database
+- firebase (database)
+
+
