@@ -88,15 +88,18 @@ const NewRegistration = () => {
 
                <>
                <p>
-                  <button type="Submit" className="register-button">
-                  Register
-               </button> 
+                     <button type="Submit" className="register-button">
+                        Register
+                     </button> 
+                  
                </p>
 
                <p>
-               <button className="back-to-login-button">
-                  Back To Login
-               </button>
+                  <Link to="/">
+                     <button className="back-to-login-button">
+                        Back To Login
+                     </button>
+                  </Link>
                </p>
                </>
             </form>

@@ -44,7 +44,8 @@
    cursor: pointer;
  }
  
- .register-button:hover {
+ .register-button:hover,
+ .back-to-login-button:hover {
    background-color: #0056b3;
  }
  
