@@ -24,14 +24,14 @@ const LandingPage = () => {
          <h1>Welcome To FPL</h1>
 
          <div className='input-group'>
-            <label htmlFor='username'>Username: </label>
+            <label htmlFor='username'>Team Name: </label>
             <input 
                type='text'
                id='username'
                name='username'
                value={username}
                onChange={(e) => setUsername(e.target.value)}
-               placeholder='Enter username as it is in FPL'
+               placeholder='Enter team name as it is in FPL'
             />
          </div>
 

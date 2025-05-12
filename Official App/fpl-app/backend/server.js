@@ -1,15 +1,21 @@
-import express from "express";
+const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
+
+/*
+import express from 'express';
 import cors from "cors";
 import axios from "axios";
+*/
 
-const app = express();
-app.use(cors()); // Enable CORS
+const server = express();
+server.use(cors()); // Enable CORS
 
 const API_URL = "https://fantasy.premierleague.com/api/leagues-classic/697909/standings/"; // 697909 for the specific league
 
 //Proxy endpoint
 
-app.get("/api/league", async ( req, res) => {
+server.get("/api/league", async ( req, res) => {
    try {
       const response = await axios.get(API_URL, {
          headers: { "User-Agent": "Mozilla/5.0" }, // Some APIs require a User-Agent
@@ -25,5 +31,5 @@ app.get("/api/league", async ( req, res) => {
 });
 
 //Start the server
-const PORT = 5001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const PORT = process.env.PORT || 5001;
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
