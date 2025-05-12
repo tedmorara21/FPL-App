@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import "../Landing Page/Landingpage.css";
 
@@ -7,13 +7,16 @@ const LandingPage = () => {
    const [ username, setUsername ] = useState('');
    const [ password, setPassword] = useState('');
 
+   const navigate = useNavigate();
+
    const handleLogin = () => {
       if ( username === '' || password === '' ) {
          alert ("Enter both username and password");
-      }
-
-      // Continue with login logic here
-      console.log("Logging in with:", { username, password });
+      } else {
+         // Continue with login logic here         
+         console.log("Logging in with:", { username, password });
+         navigate("/dashboard");
+      }    
    }
 
    return (
@@ -26,6 +29,8 @@ const LandingPage = () => {
                type='text'
                id='username'
                name='username'
+               value={username}
+               onChange={(e) => setUsername(e.target.value)}
                placeholder='Enter username as it is in FPL'
             />
          </div>
@@ -36,13 +41,13 @@ const LandingPage = () => {
                type='password'
                id='password'
                name='password'
+               value={password}
+               onChange={(e) => setPassword(e.target.value)}
                placeholder='Enter your password'
             />
          </div>
 
-         <Link to="/dashboard">
-            <button onClick={handleLogin}>Login</button>
-         </Link>
+         <button onClick={handleLogin}>Login</button>
 
          <Link to="/new-registration">
             <button>Register</button>

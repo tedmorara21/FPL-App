@@ -3,11 +3,7 @@ import cors from "cors";
 import axios from "axios";
 
 const app = express();
-app.use(cors({
-   origin: "*", // Allow all origins
-   methods: ["GET"], // Allow only GET requests
-   allowedHeaders: ["Content-Type"]
- })); // Enable CORS
+app.use(cors()); // Enable CORS
 
 const API_URL = "https://fantasy.premierleague.com/api/leagues-classic/697909/standings/"; // 697909 for the specific league
 
