@@ -12,40 +12,48 @@
    margin-bottom: 30px;
    color: #333333;
  }
- 
- .registration-field {
-   display: flex;
-   flex-direction: column;
-   margin-bottom: 20px;
+
+ .input-group {
+  margin-bottom: 20px;
+  text-align: left;
  }
- 
- .registration-field label {
-   margin-bottom: 8px;
-   font-weight: 600;
-   color: #555555;
- }
- 
- .registration-field input {
-   padding: 10px;
-   font-size: 16px;
-   border: 1px solid #cccccc;
-   border-radius: 5px;
- }
- 
- .register-button,
- .back-to-login-button {
-   width: 100%;
-   padding: 12px;
-   font-size: 16px;
-   background-color: #007bff;
-   color: #ffffff;
-   border: none;
-   border-radius: 5px;
-   cursor: pointer;
- }
- 
- .register-button:hover,
- .back-to-login-button:hover {
-   background-color: #0056b3;
- }
- 
+
+ .input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555555;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.button-group button {
+  flex: 1;
+  padding: 10px 15px;
+  margin: 0 5px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-group button:hover {
+  opacity: 0.9;
+}
+
+.button-group .back-to-login-button {
+  background-color: #6c757d;
+  color: #ffffff;
+}  

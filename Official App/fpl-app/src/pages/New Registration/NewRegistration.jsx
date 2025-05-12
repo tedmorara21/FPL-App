@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
-
+ 
 import "../New Registration/NewRegistration.css";
 
 const NewRegistration = () => {
+   const navigate = useNavigate();
+
    const [ teamName, setTeamName ] = useState('');
    const [ email, setEmail ] = useState('');
    const [ phoneNumber, setPhoneNumber ] = useState('');
@@ -22,6 +24,8 @@ const NewRegistration = () => {
          setPhoneNumber('');
          setPassword('');
          setConfirmPassword('');
+         alert("Account Created!");
+         navigate('/');
          // Proceed with further actions, such as sending data to a server
       }
    }
@@ -35,7 +39,7 @@ const NewRegistration = () => {
                confirmPasswordFunction();
             } } >
 
-               <p>
+               <div className='input-group'>
                <label> Team Name </label>
                   <input 
                      type="text" 
@@ -44,9 +48,9 @@ const NewRegistration = () => {
                      placeholder="Name As It Is In FPL League" 
                      required
                   />
-               </p>
+               </div>
 
-               <p>
+               <div className='input-group'>
                <label> Email Address </label>
                   <input 
                      type="email" 
@@ -54,9 +58,9 @@ const NewRegistration = () => {
                      onChange={(e) => setEmail(e.target.value)}
                      required
                   />
-               </p>
+               </div>
 
-               <p>
+               <div className='input-group'>
                <label> Phone  Number (07) </label>
                   <input 
                      type="text" 
@@ -64,9 +68,9 @@ const NewRegistration = () => {
                      onChange={(e) => setPhoneNumber(e.target.value)}
                      required
                   />
-               </p>
+               </div>
 
-               <p>
+               <div className='input-group'>
                <label> Password </label>
                   <input 
                      type="password" 
@@ -74,9 +78,9 @@ const NewRegistration = () => {
                      onChange={(e) => setPassword(e.target.value)}
                      required
                   /> 
-               </p>
+               </div>
 
-               <p>
+               <div className='input-group'>
                <label> Confirm Password </label>
                   <input 
                      type="password" 
@@ -84,23 +88,21 @@ const NewRegistration = () => {
                      onChange={(e) => setConfirmPassword(e.target.value)}
                      required
                   />
-               </p>
+               </div>
 
                <>
-               <p>
+               <div className='button-group'>
                      <button type="Submit" className="register-button">
                         Register
-                     </button> 
-                  
-               </p>
-
-               <p>
-                  <Link to="/">
-                     <button className="back-to-login-button">
-                        Back To Login
                      </button>
+
+                     <Link to="/">
+                        <button className="back-to-login-button">
+                           Back To Login
+                        </button>
                   </Link>
-               </p>
+                  
+               </div>
                </>
             </form>
          </div>
