@@ -6,27 +6,48 @@ import "../New Registration/NewRegistration.css";
 const NewRegistration = () => {
    const navigate = useNavigate();
 
-   const [ teamName, setTeamName ] = useState('');
+   const [ playerName, setPlayerName ] = useState('');
    const [ email, setEmail ] = useState('');
    const [ phoneNumber, setPhoneNumber ] = useState('');
    const [ password, setPassword ] = useState('');
    const [ confirmPassword, setConfirmPassword ] = useState(''); 
 
-   const confirmPasswordFunction = () => {
+   const confirmPasswordFunction = async () => {
       if ( password !== confirmPassword) {
          alert("Passwords do not match!")
          return;
-      } else {
-         const newRegistrationData = { teamName, email, phoneNumber, password };
-         console.log("Registration Data : ", newRegistrationData);
-         setTeamName('');
-         setEmail('');
-         setPhoneNumber('');
-         setPassword('');
-         setConfirmPassword('');
-         alert("Account Created!");
-         navigate('/');
-         // Proceed with further actions, such as sending data to a server
+      } 
+      
+      try {
+         const response = await fetch("https://fpl-proxy-server.onrender.com/api/league");
+         const data = await response.json();
+
+         const leagueTeams = data.standings.results;
+         const teamExists = leagueTeams.some(team => team.player_name === playerName)
+
+         if (!teamExists) {
+            alert("No such team name found in the FPL league!")
+         } else {
+            //IF MATCH IS FOUND, PROCEED
+            const newRegistrationData = { playerName, email, phoneNumber, password };
+            console.log("Registration Data: ", newRegistrationData);
+            
+            //RESET FORM
+            setPlayerName('');
+            setEmail('');
+            setPhoneNumber('');
+            setPassword('');
+            setConfirmPassword('')
+            alert("Account Created!");
+
+            //REDIRECT
+            navigate('/')
+
+            //SEND DATA TO MONGODB SERVER HERE!!!!!
+         }
+      } catch ( error ) {
+         console.error("Error checking team name by Guzuuu: ", error);
+         alert('Something went wrong.Please try again.');
       }
    }
 
@@ -40,11 +61,11 @@ const NewRegistration = () => {
             } } >
 
                <div className='input-group'>
-               <label> Team Name </label>
+               <label> Player Name </label>
                   <input 
                      type="text" 
-                     value={teamName} 
-                     onChange={(e) => setTeamName(e.target.value)}
+                     value={playerName} 
+                     onChange={(e) => setPlayerName(e.target.value)}
                      placeholder="Name As It Is In FPL League" 
                      required
                   />

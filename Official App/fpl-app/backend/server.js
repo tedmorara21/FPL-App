@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const mongoose = require('mongoose');
 
 /*
 import express from 'express';
@@ -13,8 +14,9 @@ server.use(cors()); // Enable CORS
 
 const API_URL = "https://fantasy.premierleague.com/api/leagues-classic/697909/standings/"; // 697909 for the specific league
 
-//Proxy endpoint
+//PROXY ENDPOINT
 
+//GET USERS OF THE LEAGUE AND THEIR DATA
 server.get("/api/league", async ( req, res) => {
    try {
       const response = await axios.get(API_URL, {
@@ -29,6 +31,8 @@ server.get("/api/league", async ( req, res) => {
       res.status(500).json({ error: "Error fetching data from the API" });
    }
 });
+
+//
 
 //Start the server
 const PORT = process.env.PORT || 5001;
