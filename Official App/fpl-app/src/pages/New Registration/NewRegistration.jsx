@@ -40,10 +40,27 @@ const NewRegistration = () => {
             setConfirmPassword('')
             alert("Account Created!");
 
+            //SEND DATA TO MONGODB SERVER HERE!!!!!
+            await fetch("https://fpl-proxy-server.onrender.com/api/users", {
+               method: "POST",
+               headers: {
+                  "Content-Type": "application/json"
+               },
+               body: JSON.stringify({ playerName, email, phoneNumber, password })
+            })
+            .then( res => {
+               if (!res.ok) throw new Error ("Failed to register user");
+               return res.json();
+            })
+            .then ( data => {
+               console.log("User saved to MongoDB:", data);
+            })
+            .catch(err => {
+               console.error("Error saving user to MongoDB:" ,err);
+            })
+
             //REDIRECT
             navigate('/')
-
-            //SEND DATA TO MONGODB SERVER HERE!!!!!
          }
       } catch ( error ) {
          console.error("Error checking team name by Guzuuu: ", error);
