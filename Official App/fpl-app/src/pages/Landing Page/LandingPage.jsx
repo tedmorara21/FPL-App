@@ -7,7 +7,7 @@ import "../Landing Page/Landingpage.css";
 import { loginToApp } from '../../api/login-api';
 
 const LandingPage = () => {
-   const [ username, setUsername ] = useState('');
+   const [ playername, setPlayerName ] = useState('');
    const [ password, setPassword] = useState('');
    const [ serverDown, setServerDown ] = useState(false);
 
@@ -63,8 +63,8 @@ const LandingPage = () => {
                type='text'
                id='username'
                name='username'
-               value={username}
-               onChange={(e) => setUsername(e.target.value)}
+               value={playername}
+               onChange={(e) => setPlayerName(e.target.value)}
                placeholder='Enter team name as it is in FPL'
             />
          </div>

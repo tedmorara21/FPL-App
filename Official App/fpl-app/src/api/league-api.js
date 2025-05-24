@@ -8,8 +8,8 @@ export const getLeagueStandings = async () => {
       // console.log("Fetching data from:", API_URL);
       const response = await axios.get(API_URL);
 
-      console.log("Full API Response: ", response);
-      console.log("API Data: ", response.data);
+      // console.log("Full API Response: ", response);
+      // console.log("API Data: ", response.data);
 
       //Get users from the API response
       // Ensure API response has data before accessing

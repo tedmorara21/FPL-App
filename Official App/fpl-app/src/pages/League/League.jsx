@@ -14,9 +14,9 @@ const League = () => {
     let isMounted = true; // Prevent state update after unmounting
 
     const fetchData = async () => {
-      console.log("Fetching data from: URL");
+      // console.log("Fetching data from: URL");
         const data = await getLeagueStandings();
-        console.log("Fetched Users: " , data);  // Debugging
+        // console.log("Fetched Users: " , data);  // Debugging
         if (isMounted) {
           setUsers(data); // Set correct users data
           setLoading(false);
