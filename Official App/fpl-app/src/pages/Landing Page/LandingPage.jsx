@@ -1,22 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 
 import "../Landing Page/Landingpage.css";
 
+import { loginToApp } from '../../api/login-api';
+
 const LandingPage = () => {
    const [ username, setUsername ] = useState('');
    const [ password, setPassword] = useState('');
+   const [ serverDown, setServerDown ] = useState(false);
 
    const navigate = useNavigate();
 
-   const handleLogin = () => {
-      if ( username === '' || password === '' ) {
+   useEffect ( () => {
+      const checkServer = async () => {
+         try {
+            await axios.get("https://fpl-proxy-server.onrender.com/api/users");
+         } catch (error) {
+            setServerDown(true);
+         }
+      }
+
+      checkServer();
+   }, [] );
+
+
+   const handleLogin = async () => {
+      if ( playername === '' || password === '' ) {
          alert ("Enter both username and password");
-      } else {
-         // Continue with login logic here         
-         console.log("Logging in with:", { username, password });
+         return;
+      };
+
+      // SEND CREDENTIALS TO BACKEND   
+      const result = await loginToApp( playername, password );
+      
+      if (result.validity === true) {
+         // console.log("Login successful:", result.user);
+         alert(result.message);
          navigate("/dashboard");
-      }    
+      } else {
+         alert(result.message);
+      }
+   }
+
+   if (serverDown) {
+      return (
+         <div className='landing-container'>
+            <h1>⚠️ Servers are down by Guzuuu</h1>
+            <p>Please try again later</p>
+         </div>
+      )
    }
 
    return (

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
  
 import "../New Registration/NewRegistration.css";
 
+import { checkUserExists } from '../../functions/check-user-exists';
+
 const NewRegistration = () => {
    const navigate = useNavigate();
 
@@ -13,11 +15,19 @@ const NewRegistration = () => {
    const [ confirmPassword, setConfirmPassword ] = useState(''); 
 
    const confirmPasswordFunction = async () => {
+      // CHECK PHONE NUMBER LENGTH == 10 DIGITS
+      if (phoneNumber.length !== 10) {
+         alert("Check phone number!");
+         return;
+      }
+
+      // CHECK IF PASSWORDS MATCH
       if ( password !== confirmPassword) {
          alert("Passwords do not match!")
          return;
       } 
       
+      // CHECK IF PLAYERNAME EXISTS IN DATABASE
       try {
          const response = await fetch("https://fpl-proxy-server.onrender.com/api/league");
          const data = await response.json();
@@ -27,40 +37,52 @@ const NewRegistration = () => {
 
          if (!teamExists) {
             alert("No such team name found in the FPL league!")
-         } else {
+         } else { 
+            const userExists = await checkUserExists(playerName);
+
+            if (userExists === true) {
+               alert("Player already registered!");
+               return;
+            } else if (userExists === undefined) {
+               alert("Server error. Try again later!");
+               return;
+            }
             //IF MATCH IS FOUND, PROCEED
             const newRegistrationData = { playerName, email, phoneNumber, password };
-            console.log("Registration Data: ", newRegistrationData);
+
+            // console.log("Registration Data: ", newRegistrationData);
             
-            //RESET FORM
-            setPlayerName('');
-            setEmail('');
-            setPhoneNumber('');
-            setPassword('');
-            setConfirmPassword('')
-            alert("Account Created!");
+            //SEND DATA TO MONGODB HERE
+            try {
+               const res = await fetch("https://fpl-proxy-server.onrender.com/api/users", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify( { playerName, email, phoneNumber, password} )
+               });
 
-            //SEND DATA TO MONGODB SERVER HERE!!!!!
-            await fetch("https://fpl-proxy-server.onrender.com/api/users", {
-               method: "POST",
-               headers: {
-                  "Content-Type": "application/json"
-               },
-               body: JSON.stringify({ playerName, email, phoneNumber, password })
-            })
-            .then( res => {
-               if (!res.ok) throw new Error ("Failed to register user");
-               return res.json();
-            })
-            .then ( data => {
-               console.log("User saved to MongoDB:", data);
-            })
-            .catch(err => {
-               console.error("Error saving user to MongoDB:" ,err);
-            })
+               if (!res.ok) {
+                  const errorData = await res.json();
+                  alert(`Registration Failed: ${errorData.error || "Uknown error"}`);
+                  return;
+               }
 
-            //REDIRECT
-            navigate('/')
+               const data = await res.json();
+
+               // console.log("User saved to Mongodb", data);
+
+               //RESET FORM
+               alert("Account created!");
+               setPlayerName("");
+               setEmail("");
+               setPhoneNumber("");
+               setPassword("");
+               setConfirmPassword("");
+
+               //REDIRECT
+               navigate("/");
+            } catch (error) {
+               console.error("Error saving user to Mongodb by Guzuuu: ", error);
+            }
          }
       } catch ( error ) {
          console.error("Error checking team name by Guzuuu: ", error);
