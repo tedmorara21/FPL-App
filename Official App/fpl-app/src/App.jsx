@@ -13,7 +13,7 @@ import NewRegistration from './pages/New Registration/NewRegistration.jsx';
 function App() {
   const location = useLocation();
 
-  const isLandingpage = location.pathname === '/';
+  const isLandingpage = location.pathname === '/' || location.pathname === "/new-registration";
 
   let showSidebar = false;
   if (!isLandingpage) {
