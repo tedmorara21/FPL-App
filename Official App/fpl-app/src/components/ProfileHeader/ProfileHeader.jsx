@@ -4,7 +4,8 @@ import "./ProfileHeader.css";
 const ProfileHeader = ( { name, balance, points } ) => {
    return (
       <>
-      <div class="profile-header" >
+      <Link />
+      <div className="profile-header" >
          <span className="profile-item" >🏆 { name } </span> <br />
          <span className="profile-item" >💰 { balance } shs</span> <br />
          <span className="profile-item" >⭐ { points } points</span> <br />
