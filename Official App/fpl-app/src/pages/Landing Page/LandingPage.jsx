@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 
-import "../Landing Page/Landingpage.css";
+import "../Landing Page/LandingPage.css";
 
 import { loginToApp } from '../../api/login-api';
 
