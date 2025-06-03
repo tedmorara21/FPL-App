@@ -6,6 +6,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+const jwt = require('jsonwebtoken');
+const jwt_decode = require("json-decode");
+const secret_key = 'tedmorara21'; 
+
 /*
 import express from 'express';
 import cors from "cors";
@@ -50,8 +54,6 @@ const UserSchema = new mongoose.Schema({
   phoneNumber: String,
   password: String
 });
-const User = mongoose.model('Login Details', UserSchema);
-
 
 const duplicateUserSchema = new mongoose.Schema( {
    id: Number,
@@ -63,6 +65,8 @@ const duplicateUserSchema = new mongoose.Schema( {
    balance: Number,
    moneyEarned: Number
 } )
+
+const User = mongoose.model('Login Details', UserSchema);
 const DuplicateUser = mongoose.model("User Details", duplicateUserSchema, "UserDetails");
 
 // GET USERS
@@ -158,6 +162,16 @@ server.post("/api/login", async ( req, res ) => {
       };
 
       //optional: return a token or user data
+      const token = jwt.sign(
+         { id: player.playerName }, //PAYLOAD
+         secret_key,
+         { expiresIn: "1h" }
+      )
+      //console.loG(token);
+
+      const decodedToken = jwt.verify(token, secret_key);
+      //console.log("Decoded Token: ", decodedToken);
+
       res.status(200).json( {
          message: "Login successful",
          user: {
@@ -165,7 +179,9 @@ server.post("/api/login", async ( req, res ) => {
             email: player.email,
             phoneNumber: player.phoneNumber
             //NEVER SEND THE PASSWORD HASH
-         }
+         },
+         token: token,
+         decodedToken, decodedToken
       } );
 
    } catch ( error ) {
@@ -173,6 +189,8 @@ server.post("/api/login", async ( req, res ) => {
       res.status(500).json( { message: "Internal Server error!" } );
    }
 })
+
+
 
 
 
