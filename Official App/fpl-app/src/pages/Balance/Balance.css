@@ -1,0 +1,79 @@
+.balance-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-height: 100vh;
+   background-color: #f0f2f5;
+   padding: 0px;
+}
+
+.balance-card {
+   background-color: #fff;
+   border-radius: 16px;
+   padding: 30px;
+   max-width: 500px;
+   width: 100%;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.balance-title {
+   text-align: center;
+   margin-bottom: 20px;
+   font-size: 28px;
+}
+
+.balance-info p {
+   font-size: 16px;
+   margin: 10px 0;
+}
+
+.balance-actions {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   justify-content: space-between;
+   margin-top: 30px;
+}
+
+.balance-actions div {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+input {
+   padding: 10px;
+   font-size: 16px;
+   border-radius: 6px;
+   border: 1px solid #ccc;
+}
+
+.btn {
+   padding: 10px 20px;
+   font-size: 16px;
+   width: 48%;
+   border: none;
+   border-radius: 8px;
+   cursor: pointer;
+}
+
+.pay-button {
+   background-color: #28a745;
+   color: white;
+}
+
+.withdrw-button {
+   background-color: #007bff;
+   color: white;
+}
+
+.btn:hover {
+   opacity: 0.9;
+}
+
+.loading {
+   text-align: center;
+   margin-top: 40px;
+   font-size: 18px;
+   color: #555;
+}
