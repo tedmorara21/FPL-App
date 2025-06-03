@@ -40,7 +40,10 @@ export const loginToApp = async ( playername, password ) => {
       return {
          validity: true,
          user: response.data.user,
-         message: response.data.message
+         user_name: response.data.user.playerName,
+         message: response.data.message,
+         token: response.data.token,
+         decodedToken: response.data.decodedToken
       }
    } catch ( error ) {
       return {
