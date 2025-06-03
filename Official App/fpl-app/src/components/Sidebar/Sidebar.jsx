@@ -7,6 +7,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <h2 className="sidebar-title">DASHBOARD</h2>
+      
       <ul>
         <li>
           <Link to="dashboard/" className="sidebar-link">

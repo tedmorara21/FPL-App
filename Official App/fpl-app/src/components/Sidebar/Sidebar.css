@@ -10,6 +10,10 @@
    padding: 20px;
    display: flex;
    flex-direction: column;
+
+   overflow-y: auto; /* Enables vertical scroll if content overflows */
+   overflow-x: hidden; /* Enables horizontal overflow */
+   word-wrap: break-word; /* Ensures long words wrap up to the next line */
  }
  
  .sidebar-title {
@@ -31,6 +35,14 @@
    padding: 10px;
    border-radius: 5px;
    /*transition: background 0.3s;*/
+
+   flex-wrap: wrap;
+   white-space: normal;
+ }
+
+ .sidebar li {
+  overflow-wrap: break-word;
+  word-break: break-word;
  }
  
  .sidebar-link:hover {
