@@ -214,6 +214,22 @@ function authenticateToken (req, res, next) {
    }
 }
 
+server.get("/api/get-user-details", authenticateToken, async (req, res) => {
+   try {
+      const playerName = req.user.id;
+      
+      const user = await DuplicateUser.findOne( {playerName} );
+
+      if (!user) {
+         return res.status(404).json( {message: "User not found"} );
+      }
+
+      res.status(200).json( { message: "User not found" });
+   } catch (err) {
+      console.error("Error fetching users: ", err);
+      res.status(500).json( { message: "Internal server error" } );
+   }
+} )
 
 //Start the server
 const PORT = process.env.PORT || 5001;
