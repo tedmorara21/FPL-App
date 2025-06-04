@@ -31,11 +31,11 @@ export const UserProvider = ( {children} ) => {
 
             const userData = {
                user_id: responseDetails.id,
-               plyer_name: responseDetails.plyerNme,
+               plyer_name: responseDetails.playerNme,
                team_name: responseDetails,teamName,
                email: responseDetails.email,
                phone_number: responseDetails.phoneNumber,
-               balance: responseDetails,balance,
+               balance: responseDetails.balance,
                money_earned: responseDetails.moneyEarned,
 
                gw_points: currentUserStanding.event_total,
