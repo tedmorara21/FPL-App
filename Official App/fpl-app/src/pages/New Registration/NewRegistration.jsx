@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+import axios from 'axios';
  
 import "../New Registration/NewRegistration.css";
 
@@ -26,67 +27,67 @@ const NewRegistration = () => {
          alert("Passwords do not match!")
          return;
       } 
-      
+
       // CHECK IF PLAYERNAME EXISTS IN DATABASE
+
       try {
          const response = await fetch("https://fpl-proxy-server.onrender.com/api/league");
          const data = await response.json();
 
          const leagueTeams = data.standings.results;
-         const teamExists = leagueTeams.some(team => team.player_name === playerName)
+         const teamExists = leagueTeams.some( team => team.player_name === playerName );
 
          if (!teamExists) {
-            alert("No such team name found in the FPL league!")
-         } else { 
+            alert("No such team name found in the FPL league!");
+         } else {
             const userExists = await checkUserExists(playerName);
-
+            
             if (userExists === true) {
                alert("Player already registered!");
                return;
-            } else if (userExists === undefined) {
-               alert("Server error. Try again later!");
+            } else if ( userExists === undefined ) {
+               alert("Server error.Try again later!");
                return;
             }
+
             //IF MATCH IS FOUND, PROCEED
             const newRegistrationData = { playerName, email, phoneNumber, password };
-
             // console.log("Registration Data: ", newRegistrationData);
-            
+
             //SEND DATA TO MONGODB HERE
             try {
                const res = await fetch("https://fpl-proxy-server.onrender.com/api/users", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify( { playerName, email, phoneNumber, password} )
+                  body: JSON.stringify( { playerName, email, phoneNumber, password} ) 
                });
 
                if (!res.ok) {
                   const errorData = await res.json();
-                  alert(`Registration Failed: ${errorData.error || "Uknown error"}`);
+                  alert(`Registration Failed: ${errorData.error} || "Uknown error`);
                   return;
                }
 
                const data = await res.json();
 
-               // console.log("User saved to Mongodb", data);
+               // RESET FORM
+               alert ("Account Created!");
 
-               //RESET FORM
-               alert("Account created!");
-               setPlayerName("");
-               setEmail("");
-               setPhoneNumber("");
-               setPassword("");
-               setConfirmPassword("");
+               setPlayerName('');
+               setEmail('');
+               setPhoneNumber('');
+               setPassword('');
+               setConfirmPassword('');
 
                //REDIRECT
-               navigate("/");
-            } catch (error) {
-               console.error("Error saving user to Mongodb by Guzuuu: ", error);
+               navigate('/');
+            } catch (err) {
+               console.error("Error saving user to Mongodb by Guzuuu ", err);
             }
          }
-      } catch ( error ) {
-         console.error("Error checking team name by Guzuuu: ", error);
-         alert('Something went wrong.Please try again.');
+      } catch (err) {
+         console.error("Error checking tem name ny Guzuuu:", err);
+         alert("Something went wrong. Please try again");
       }
    }
 
