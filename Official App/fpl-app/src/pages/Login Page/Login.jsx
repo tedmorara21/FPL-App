@@ -1,18 +1,25 @@
 //import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
 import HomeButton from "../../components/HomeButton/HomeButton";
+
 import '../Login Page/Login.css';
 
 const Login = () => {
 
    const navigate = useNavigate();
 
+   const handleLogout = () => {
+      localStorage.removeItem("authTOken");
+      navigate("/");
+   }
+
    return (
       <>
          <div className="login-body">
             <HomeButton />
-            <ProfileHeader name={"Ted"} balance={2000} points={96}/>
+            <ProfileHeader />
 
             <>
                <h1>LOGIN</h1>
@@ -24,7 +31,7 @@ const Login = () => {
                <div>
                   <button 
                      className="yes-button"
-                     onClick={() => navigate("/")}
+                     onClick={() => handleLogout() }
                   >Yes</button>
                   <br /> <br />
                   <button 
