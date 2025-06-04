@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 
+// import { userContext } from "../../assets/UserContext.jsx";
+
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
 import HomeButton from "../../components/HomeButton/HomeButton.jsx";
 import { getLeagueStandings } from "../../api/league-api.js";
+
 import "./League.css";
 
 
@@ -14,7 +17,6 @@ const League = () => {
     let isMounted = true; // Prevent state update after unmounting
 
     const fetchData = async () => {
-      // console.log("Fetching data from: URL");
         const data = await getLeagueStandings();
         // console.log("Fetched Users: " , data);  // Debugging
         if (isMounted) {
@@ -29,27 +31,21 @@ const League = () => {
   }, [] );
 
   if (loading) return <p>Loading league data...</p> 
-  if (!users || users.length === 0) return <p>No league data available.</p>; // Debugging
+
+  if (!users || users.length === 0) return <p>No league data available.</p>; 
 
    return (
       <>
-        <ProfileHeader name={"Ted"} balance={1000} points={1783}/>
-
         <div className="league-body"> 
 
           <HomeButton />
-        <h1>🏆 Fantasy League Standings</h1>
-{/*
-        <ul>
-          {users.map((user) => (
-            <li key={user.entry}>
-                {user.rank}. {user.player_name} - {user.entry_name} (Points : {user.total})
-            </li>
-          ))}
-        </ul>
-*/}
+          <ProfileHeader />
 
-        <table border="1">
+        <h1>🏆 Fantasy League Standings</h1>
+
+
+        <div className="league-table-container">
+          <table border="1">
           <thead>
             <tr>
               <th> Rank </th>
@@ -60,7 +56,6 @@ const League = () => {
               <th> Total Money Earned </th>
             </tr>
           </thead>
-
           <tbody>
         {users.map((user) => (
           <tr key={user.entry}>
@@ -74,7 +69,8 @@ const League = () => {
         ))}
       </tbody>
         </table>
-
+        </div>
+        
         </div>
       </>
    );
