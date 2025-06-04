@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
+import { loginToApp } from '../../api/login-api';
 
 import "../Landing Page/LandingPage.css";
-
-import { loginToApp } from '../../api/login-api';
 
 const LandingPage = () => {
    const [ playername, setPlayerName ] = useState('');
@@ -36,8 +35,10 @@ const LandingPage = () => {
       const result = await loginToApp( playername, password );
       
       if (result.validity === true) {
-         // console.log("Login successful:", result.user);
-         alert(result.message);
+         //SUCCESSFUL LOGIN
+         localStorage.setItem("authtoken", result.token);
+
+         alert(`Welcome ${playername}`);
          navigate("/dashboard");
       } else {
          alert(result.message);
