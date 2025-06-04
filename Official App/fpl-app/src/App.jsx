@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import { Routes, Route, Link, useLocation } from "react-router-dom";
+
+import ProtectedRoute from "./components/ProtectedRoutes.jsx";
+import { UserProvider } from "./assets/UserContext.jsx";
 
 import Sidebar from "./components/Sidebar/Sidebar";
 import Dashboard from "./pages/Dashboard/Dashboard";
@@ -14,6 +17,8 @@ function App() {
   const location = useLocation();
 
   const isLandingpage = location.pathname === '/' || location.pathname === "/new-registration";
+  // const hideSidebarRoutes = ['/', '/new-registration'];
+  // const showSidebar = !hideSidebarRoutes.includes(location.pathname);
 
   let showSidebar = false;
   if (!isLandingpage) {
@@ -21,23 +26,30 @@ function App() {
   }
 
   return (
-    <div className="app-container">
+    <UserProvider>
+      <div className="app-container">
 
       {/* Sidebar */}
       {showSidebar && <Sidebar />}
 
       {/* Main Content */}
       <div className="main-content">
+
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={< LandingPage />} />
-          <Route path="/dashboard" element={< Dashboard />} />
-          <Route path="/league" element={< League />} />
-          <Route path="/balance" element={< Balance />} />
-          <Route path="/login" element={< Login />} />
           <Route path="/new-registration" element={< NewRegistration />} />
+
+          {/* Protected Routes */}
+          <Route path="/dashboard" element={<ProtectedRoute> < Dashboard /> </ProtectedRoute>} />
+          <Route path="/league" element={<ProtectedRoute> < League /> </ProtectedRoute>} />
+          <Route path="/balance" element={<ProtectedRoute> < Balance /> </ProtectedRoute>} />
+          <Route path="/login" element={<ProtectedRoute> < Login /> </ProtectedRoute>} />
+          
         </Routes>
       </div>
     </div>
+    </UserProvider>
   );
 }
 
