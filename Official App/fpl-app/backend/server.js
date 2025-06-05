@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const jwt = require('jsonwebtoken');
-const jwt_decode = require("json-decode");
+const jwt_decode = require("jwt-decode");
 const secret_key = 'tedmorara21'; 
 
 /*
@@ -40,7 +40,7 @@ server.get("/api/league", async ( req, res) => {
    }
 });
 
-mongoose.connect('mongodb+srv://tedmorara21:Whooshwhoosh.99@cluster0.jkn4gii.mongodb.net/',{
+mongoose.connect('mongodb+srv://tedmorara21:tedmorara21@cluster0.jkn4gii.mongodb.net//',{
    useNewUrlParser: true,
    useUnifiedTopology: true,
 }).then( ()=> console.log('MongoDB connected') )
