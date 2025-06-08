@@ -11,14 +11,14 @@ export const checkUserExists = async( playerName ) => {
 
       const userExists = userData.some( user => user.player_name === playerName );
 
-      if ( userExists ) {
+      if (userExists) {
          return true;
       } else {
          return false;
       }
 
-   } catch ( error ) {
-      console.error("Error fetching users by Guzuuu");
+   } catch (err) {
+      console.error("Error fetching users by Guzuuu: " ,err);
       return undefined;
    }
 }
