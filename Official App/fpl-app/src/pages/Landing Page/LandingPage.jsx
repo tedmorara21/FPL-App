@@ -41,6 +41,7 @@ const LandingPage = () => {
          alert(`Welcome ${playername}`);
          navigate("/dashboard");
       } else {
+         console.log("Error logging in")
          alert(result.message);
       }
    }

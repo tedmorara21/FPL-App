@@ -31,11 +31,12 @@ export const UserProvider = ( {children} ) => {
 
             if (!currentUserStanding) {
                console.log("Player not fuond in FPL standings: ", responseDetails.playerName);
+               return;
             }
 
             const userData = {
                user_id: responseDetails.id,
-               plyer_name: responseDetails.playerNme,
+               player_name: responseDetails.playerName,
                team_name: responseDetails,teamName,
                email: responseDetails.email,
                phone_number: responseDetails.phoneNumber,
@@ -46,7 +47,7 @@ export const UserProvider = ( {children} ) => {
                rank: currentUserStanding.rank_sort,
                total_points: currentUserStanding.total
             }
-            
+
             setUserData(userData);
          } catch (err) {
             console.error("Failed to fetch users: ", err);
