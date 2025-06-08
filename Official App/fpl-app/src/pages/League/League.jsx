@@ -59,12 +59,12 @@ const League = () => {
           <tbody>
         {users.map((user) => (
           <tr key={user.entry}>
-            <td>{user.rank}</td> {/* Rank */}
-            <td>{user.entry_name}</td> {/* Name */}
-            <td>{user.event_total}</td> {/* Points */}
-            <td>{0.00}</td> {/* Earned This Gw */}
-            <td>{user.total}</td> {/* Total Points */}
-            <td>{0.00}</td> {/* Total Money Earned */}
+            <td>{user.rank}</td>
+            <td>{user.entry_name}</td> 
+            <td>{user.event_total}</td>
+            <td>{0.00}</td>
+            <td>{user.total}</td>
+            <td>{0.00}</td> 
           </tr>
         ))}
       </tbody>

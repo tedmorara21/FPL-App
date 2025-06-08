@@ -41,10 +41,29 @@ function App() {
           <Route path="/new-registration" element={< NewRegistration />} />
 
           {/* Protected Routes */}
-          <Route path="/dashboard" element={<ProtectedRoute> < Dashboard /> </ProtectedRoute>} />
-          <Route path="/league" element={<ProtectedRoute> < League /> </ProtectedRoute>} />
-          <Route path="/balance" element={<ProtectedRoute> < Balance /> </ProtectedRoute>} />
-          <Route path="/login" element={<ProtectedRoute> < Login /> </ProtectedRoute>} />
+          <Route path="/dashboard" element={
+            <UserProvider>
+              <ProtectedRoute> < Dashboard /> </ProtectedRoute>
+            </UserProvider>
+          } />
+
+          <Route path="/league" element={
+            <UserProvider>
+              <ProtectedRoute> < League /> </ProtectedRoute>  
+            </UserProvider>
+          } />
+
+          <Route path="/balance" element={
+            <UserProvider>
+              <ProtectedRoute> < Balance /> </ProtectedRoute>
+            </UserProvider>
+          } />
+
+          <Route path="/login" element={
+            <UserProvider>
+              <ProtectedRoute> < Login /> </ProtectedRoute>
+            </UserProvider>
+          } />
           
         </Routes>
       </div>

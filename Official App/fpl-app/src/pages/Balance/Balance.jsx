@@ -93,13 +93,13 @@ const Balance = () => {
         <div className="balance-actions">
           <div>
             Enter Amount to Pay:
-            <input type="number" value={amount_to_pay} onChange={(amount) => {setPayment(Number(amount.target.value))}}> </input>
+            <input type="number" value={amount_to_pay || 0} onChange={(amount) => {setPayment(Number(amount.target.value))}}> </input>
             <button className="btn pay-button" onClick={handlePayment}>Pay</button>
           </div>
 
           <div>
             Enter Amount to Withdraw:
-            <input type="number" value={amount_to_withdraw} onChange={(amount) => {setWithdrawal(Number(amount.target.value))}}></input>
+            <input type="number" value={amount_to_withdraw || 0} onChange={(amount) => {setWithdrawal(Number(amount.target.value))}}></input>
             <button className="btn withdraw-button" onClick={handleWithdrawal}>Withdraw</button>
           </div>
 
