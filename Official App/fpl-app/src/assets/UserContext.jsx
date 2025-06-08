@@ -20,14 +20,18 @@ export const UserProvider = ( {children} ) => {
             });
 
             const responseDetails = response1.data.user;
+            // console.log("Response Details: ", responseDetails); // object
 
             const response2 = await axios.get("https://fpl-proxy-server.onrender.com/api/league");
 
             const standingsArray = response2.data.standings.results;
+            //console.log("Stndings Array: ", standingsArray); //object
 
-            const currentUserStanding = standingsArray.find(
-               (entry) => entry.player_name === responseDetails.playerName
-            )
+            const currentUserStanding = standingsArray.find( (entry) => entry.player_name === responseDetails.playerName )
+
+            if (!currentUserStanding) {
+               console.log("Player not fuond in FPL standings: ", responseDetails.playerName);
+            }
 
             const userData = {
                user_id: responseDetails.id,
@@ -42,7 +46,7 @@ export const UserProvider = ( {children} ) => {
                rank: currentUserStanding.rank_sort,
                total_points: currentUserStanding.total
             }
-
+            
             setUserData(userData);
          } catch (err) {
             console.error("Failed to fetch users: ", err);
