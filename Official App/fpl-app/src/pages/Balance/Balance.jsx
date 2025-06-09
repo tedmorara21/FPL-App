@@ -56,7 +56,7 @@ const Balance = () => {
 
   const handlePayment = () => {
     if (Number(amount_to_pay) !== 100) {
-      alert("You cn only pay 100");
+      alert("You can only pay 100");
     } else {
       // Continue with payment logic
       alert("Paid");
