@@ -36,7 +36,7 @@ const LandingPage = () => {
       
       if (result.validity === true) {
          //SUCCESSFUL LOGIN
-         localStorage.setItem("authtoken", result.token);
+         localStorage.setItem("authToken", result.token);
 
          alert(`Welcome ${playername}`);
          navigate("/dashboard");
