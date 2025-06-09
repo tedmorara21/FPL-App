@@ -17,4 +17,10 @@ Objectives
 - MongoDB for database
 - firebase (database)
 
+// Serve static files (Frontend)
+app.use(express.static("public"));
 
+// Handle unknown routes (redirect to index.html)
+app.get("*", (req, res) => {
+   res.sendFile(path.join(__dirname, "public", "index.html"));
+});
