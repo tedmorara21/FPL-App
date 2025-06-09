@@ -4,7 +4,7 @@ import axios from 'axios';
 export const UserContext = createContext();
 
 export const UserProvider = ( {children} ) => {
-   const { userData, setUserData } = useState(null);
+   const [ userData, setUserData ] = useState(null);
 
    useEffect( () => {
       const token = localStorage.getItem("authToken");
@@ -37,7 +37,7 @@ export const UserProvider = ( {children} ) => {
             const userData = {
                user_id: responseDetails.id,
                player_name: responseDetails.playerName,
-               team_name: responseDetails,teamName,
+               team_name: responseDetails.teamName,
                email: responseDetails.email,
                phone_number: responseDetails.phoneNumber,
                balance: responseDetails.balance,
