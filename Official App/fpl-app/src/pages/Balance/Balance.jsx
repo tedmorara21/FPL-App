@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import axios from "axios";
 
 import { UserContext } from "../../assets/UserContext";
 
@@ -43,7 +44,7 @@ const Balance = () => {
     // PROCEED WITH WITHDRAWAL LOGIC HERE
     try {
       if (confirm(`Do you want to withdraw ${withdrawal_amount} to ${userData.phone_number}`)) {
-        //Accepted withdrawa
+        //Accepted withdrawal
         alert(`Credited ${withdrawal_amount} to ${userData.phone_number}`);
       } else {
         //Rejected withdrawal
@@ -54,12 +55,25 @@ const Balance = () => {
     }
   }
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
+    const p1 = userData.phone_number; // 0745700178
+    const p2 = p1.slice(1, 10); // 745700178
+    const phone_number = Number(`254${p2}`); // 254745700178
+    
     if (Number(amount_to_pay) !== 100) {
       alert("You can only pay 100");
     } else {
       // Continue with payment logic
-      alert("Paid");
+      try {
+        axios.post("https://fpl-proxy-server.onrender.com/mpesa-api/stk-push", {
+          phoneNumber: phone_number,
+          amount: amount_to_pay
+        });
+        
+        alert("Check your phone to complete transaction");
+      } catch (err) {
+        alert("Payment failed. Try again")
+      }
     }
   }
 
