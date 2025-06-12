@@ -10,6 +10,8 @@ const jwt = require('jsonwebtoken');
 const jwt_decode = require("jwt-decode");
 const secret_key = 'tedmorara21'; 
 
+const { mpesaServer } = require("./mpesa"); 
+
 /*
 import express from 'express';
 import cors from "cors";
@@ -19,6 +21,7 @@ import axios from "axios";
 const server = express();
 server.use(cors()); // ENABLE CORS
 server.use(express.json());  //TO PARSE JSON REQUEST BODY   
+server.use("/mpesa-api", mpesaServer);
 
 //PROXY ENDPOINTS
 
