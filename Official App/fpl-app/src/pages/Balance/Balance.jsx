@@ -5,7 +5,7 @@ import { UserContext } from "../../assets/UserContext";
 
 import "../Balance/Balance.css";
 
-import HomeButton from "../../components/HomeButton/HomeButton.jsx"
+// import HomeButton from "../../components/HomeButton/HomeButton.jsx"
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader.jsx";
 
 const Balance = () => { 
@@ -87,9 +87,7 @@ const Balance = () => {
      <div className="balance-container">
       <div className="balance-card">
 
-        <div>
-          <HomeButton />
-        </div>
+        {/* <HomeButton /> */}
 
         <h1 className="balance-title">💰 Balance</h1>
 
