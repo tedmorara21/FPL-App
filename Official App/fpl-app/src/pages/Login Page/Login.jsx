@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
-import HomeButton from "../../components/HomeButton/HomeButton";
+// import HomeButton from "../../components/HomeButton/HomeButton";
 
 import '../Login Page/Login.css';
 
@@ -18,7 +18,7 @@ const Login = () => {
    return (
       <>
          <div className="login-body">
-            <HomeButton />
+            {/* <HomeButton /> */}
             <ProfileHeader />
 
             <>
