@@ -26,7 +26,6 @@ function App() {
   }
 
   return (
-    <UserProvider>
       <div className="app-container">
 
       {/* Sidebar */}
@@ -68,7 +67,6 @@ function App() {
         </Routes>
       </div>
     </div>
-    </UserProvider>
   );
 }
 
