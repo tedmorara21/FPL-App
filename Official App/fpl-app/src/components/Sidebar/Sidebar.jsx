@@ -13,8 +13,8 @@ const Sidebar = () => {
 
   return (
     <div className={`sidebar ${collapsed ? "collapsed" : "" }`}>
-      <div className="toggle-btn onClick={toggleSidebar}">
-        ☰ Dashboard
+      <div className="toggle-btn" onClick={toggleSidebar}>
+        {collapsed ? "☰" : "☰ Dashboard" }
       </div>
       
       <ul>
