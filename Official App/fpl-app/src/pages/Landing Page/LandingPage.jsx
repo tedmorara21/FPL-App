@@ -9,8 +9,21 @@ const LandingPage = () => {
    const [ playername, setPlayerName ] = useState('');
    const [ password, setPassword] = useState('');
    const [ serverDown, setServerDown ] = useState(false);
+   const [ inputError, setInputError ] = useState("");
+   const [ loading, setLoading ] = useState(false);
+   const [ loginSuccess, setLoginSuccess ] = useState(false);
 
    const navigate = useNavigate();
+
+   let errorMessage = null;
+   if (inputError) {
+      errorMessage = <p className="input-error">{inputError}</p>
+   }
+
+   let successfulMessage = null;
+   if (loginSuccess === true) {
+      successfulMessage = <p className="successful-message">Successful Login. Directing to Dashboard...</p>
+   }
 
    useEffect ( () => {
       const checkServer = async () => {
@@ -27,22 +40,27 @@ const LandingPage = () => {
 
    const handleLogin = async () => {
       if ( playername === '' || password === '' ) {
-         alert ("Enter both username and password");
+         setInputError("Username and/or password required");
+         setTimeout( () => setInputError(""), 1500 );
          return;
       };
 
+      setInputError("");
+      setLoading(true);
+
       // SEND CREDENTIALS TO BACKEND   
       const result = await loginToApp( playername, password );
+      setLoading(false);
       
       if (result.validity === true) {
          //SUCCESSFUL LOGIN
          localStorage.setItem("authToken", result.token);
 
-         alert(`Welcome ${playername}`);
-         navigate("/dashboard");
+         setLoginSuccess(true);
+         setTimeout( () => navigate("/dashboard"), 4000);
       } else {
-         console.log("Error logging in")
-         alert(result.message);
+         setInputError(result.message || "Login Failed");
+         setTimeout( () => setInputError(""), 4000 );
       }
    }
 
@@ -66,7 +84,10 @@ const LandingPage = () => {
                id='username'
                name='username'
                value={playername}
-               onChange={(e) => setPlayerName(e.target.value)}
+               onChange={(e) => {
+                  setPlayerName(e.target.value);
+                  if (e.target.value !== "") setInputError("");
+               }}
                placeholder='Enter team name as it is in FPL'
             />
          </div>
@@ -78,16 +99,30 @@ const LandingPage = () => {
                id='password'
                name='password'
                value={password}
-               onChange={(e) => setPassword(e.target.value)}
+               onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (e.target.value !== "") setInputError("");
+               }}
                placeholder='Enter your password'
             />
+
+            {errorMessage}
+            {successfulMessage}
+            
          </div>
 
-         <button onClick={handleLogin}>Login</button>
+         <div className="button-group">
+            <button 
+               onClick={ handleLogin }
+               className={ loading? "loading-button" : "" }
+               disabled={ loading }
+            >{ loading? "Loading..." : "Login" }
+            </button>
 
-         <Link to="/new-registration">
-            <button>Register</button>
-         </Link>
+            <Link to="/new-registration">
+               <button>Register</button>
+            </Link>
+         </div>
 
       </ div>
    )
