@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 // import { userContext } from "../../assets/UserContext.jsx";
 
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
-import HomeButton from "../../components/HomeButton/HomeButton.jsx";
+// import HomeButton from "../../components/HomeButton/HomeButton.jsx";
 import { getLeagueStandings } from "../../api/league-api.js";
 
 import "./League.css";
@@ -38,7 +38,7 @@ const League = () => {
       <>
         <div className="league-body"> 
 
-          <HomeButton />
+          {/* <HomeButton /> */}
           <ProfileHeader />
 
         <h1>🏆 Fantasy League Standings</h1>
