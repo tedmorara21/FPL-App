@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from '../../assets/UserContext';
 
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
-import HomeButton from "../../components/HomeButton/HomeButton";
+// import HomeButton from "../../components/HomeButton/HomeButton";
 import "./Dashboard.css"
 
 const Dashboard = () => {
@@ -23,9 +23,8 @@ const Dashboard = () => {
    return (
      <>
      <div className="dashboard-body">
-        <div>
-            <HomeButton />
-        </div>
+  
+       {/* <HomeButton /> */}
 
        <h1>DASHBOARD</h1>
 
