@@ -80,6 +80,7 @@ const Balance = () => {
     // PROCEED WITH WITHDRAWAL LOGIC HERE
     setWithdrawMessage({ success: `Credited shs ${withdrawable} to ${userData.phone_number}`, error: null });
     setTimeout( () => setWithdrawMessage({ success: null, error: null }), 3500 );
+  };
   
   if (!userData) {
     return (
