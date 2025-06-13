@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import axios from "axios";
 
 import { UserContext } from "../../assets/UserContext";
+import { handleWithdrawalCost } from "../../functions/handle-withdrawal-cost.js";  
 
 import "../Balance/Balance.css";
 
@@ -13,47 +14,12 @@ const Balance = () => {
 
   const [ amount_to_pay, setPayment ] = useState(0);
   const [ amount_to_withdraw, setWithdrawal ] = useState(0);
+  const [ withdrawable, setWithdrawable ] = useState(0);
 
-  const handleWithdrawal = async () => {
-    let withdrawal_amount;
-
-    if ( amount_to_withdraw <= 0 ) {
-      alert("Please enter a valid amount");
-      return;
-    }
-
-    if ( amount_to_withdraw > userData.balance ) {
-      alert("Cannot withdraw more than your balance");
-      return;
-    }
-
-    const handleWithdrawalCost = async => {
-      if (amount_to_withdraw <= 100 ) return withdrawal_amount = amount_to_withdraw ;
-      if (amount_to_withdraw <= 500 ) return withdrawal_amount = amount_to_withdraw - 7 ;
-      if (amount_to_withdraw <= 1000 ) return withdrawal_amount = amount_to_withdraw - 13 ;
-      if (amount_to_withdraw <= 1500 ) return withdrawal_amount = amount_to_withdraw - 23 ;
-      if (amount_to_withdraw <= 2500 ) return withdrawal_amount = amount_to_withdraw - 33 ;
-      if (amount_to_withdraw <= 3500 ) return withdrawal_amount = amount_to_withdraw - 53 ;
-      if (amount_to_withdraw <= 5000 ) return withdrawal_amount = amount_to_withdraw - 57 ;
-      if (amount_to_withdraw <= 7500 ) return withdrawal_amount = amount_to_withdraw - 78 ;
-      return withdrawal_amount;
-    } 
-
-    handleWithdrawalCost();
-
-    // PROCEED WITH WITHDRAWAL LOGIC HERE
-    try {
-      if (confirm(`Do you want to withdraw ${withdrawal_amount} to ${userData.phone_number}`)) {
-        //Accepted withdrawal
-        alert(`Credited ${withdrawal_amount} to ${userData.phone_number}`);
-      } else {
-        //Rejected withdrawal
-        return;
-      }
-    } catch (err) {
-      alert("Withdrawal failed. Try again later");
-    }
-  }
+  const [ paymentMessage, setPaymentMessage ] = useState({ error: null, success: null });
+  const [ withdrawMessage, setWithdrawtMessage ] = useState({ error: null, success: null });
+  
+  const [ showConfirmDialog, setShowConfirmDialog ] = useState(false);
 
   const handlePayment = async () => {
     const p1 = userData.phone_number; // 0745700178
@@ -61,25 +27,89 @@ const Balance = () => {
     const phone_number = Number(`254${p2}`); // 254745700178
     
     if (Number(amount_to_pay) !== 100) {
-      alert("You can only pay 100");
+      setPaymentMessage({ error: "You can only pay 100!", success: null});
+      setTimeout( () => setPaymentMessage({ error: null, success: null }), 1500 );
     } else {
-      // Continue with payment logic
+      // CONTINUE WITH PAYMENT LOGIC
       try {
         axios.post("https://fpl-proxy-server.onrender.com/mpesa-api/stk-push", {
           phoneNumber: phone_number,
           amount: amount_to_pay
         });
         
-        alert("Check your phone to complete transaction");
+        setPaymentMessage({ success: "Check your phone to complete transaction", error: null });
+        setTimeout( () => setPaymentMessage({ success: null, error: null }), 2500 )
       } catch (err) {
-        alert("Payment failed. Try again")
+        setPaymentMessage({ error: "Payment Failed. Try again", success: null });
+        setTimeout( () => setPaymentMessage({ success: null, error: null }), 2500 )
       }
     }
   }
 
+  const confirmWithdrawal = () => {
+    if ( userData.balance <=0 ) {
+      setWithdrawMesssage({ error: "You don't have money! Improve your game", success: null });
+      setTimeout( () => setWithdrawMessage({ success: null, error: null }) );
+      return;
+    }
+
+    if ( amount_to_withdraw <=0 ) {
+      setWithdrawMessage({ error: "Please enter a valid amount", success: null });
+      setTimeout( () => setWithdrawMessage({ success: null, error: null }), 1500 );
+      return;
+    }
+
+    if ( amount_to_withdraw > userData.balance ) {
+      setWithdrawMessage({ error: "Cannot withdraw more than your balance", success: null });
+      setTimeout( () => setWithdrawMessage({ success: null, error: null }), 1500 );
+      return;
+    }
+
+    setShowConfirmDialog(true);
+  }
+
+  const handleWithdrawal = async () => {
+    
+    const getWithdrawalCostandAmount = async () => {
+      const result = await handleWithdrawalCost(amount_to_withdraw);
+      setWithdrawable(result.withdrawable);
+    } 
+
+    await getWithdrawalCostandAmount();
+
+    // PROCEED WITH WITHDRAWAL LOGIC HERE
+    setWithdrawMessage({ success: `Credited shs ${withdrawable} to ${userData.phone_number}`, error: null });
+    setTimeout( () => setWithdrawMessage({ success: null, error: null }), 3500 );
+  
   if (!userData) {
     return (
       <p className="loading">Loading....</p>
+    )
+  }
+
+  if (showConfirmDialog === true) {
+    const getWithdrawalCostandAmount = async () => {
+      const result = await handleWithdrawalCost(amount_to_withdraw);
+      setWithdrawable(result.withdrawable);
+    }
+    getWithdrawalCostandAmount();
+
+    return (
+      <>
+        <div className="modal">
+          <p className="modal-text"> Do you want to withdraw {withdrawable} to {userData.phone_number}? </p>
+
+          <div className="modal-buttons">
+            <button className="yes-btn" onClick={ () => {
+              handleWithdrawal();
+              setShowConfirmDialog(false);
+            }}> Yes </button>
+
+            <button className="no-btn" onClick={ () => setShowConfirmDialog(false) }> No </button>
+          </div>
+          
+        </div>
+      </>
     )
   }
 
@@ -107,12 +137,16 @@ const Balance = () => {
             Enter Amount to Pay:
             <input type="number" value={amount_to_pay || 0} onChange={(amount) => {setPayment(Number(amount.target.value))}} /> 
             <button className="btn pay-button" onClick={handlePayment}>Pay</button>
+            { paymentMessage.error ? <p className="payment-error">{paymentMessage.error}</p> : "" }
+            { paymentMessage.success ? <p className="payment-success">{paymentMessage.success}</p> : "" }
           </div>
 
           <div>
             Enter Amount to Withdraw:
             <input type="number" value={amount_to_withdraw || 0} onChange={(amount) => {setWithdrawal(Number(amount.target.value))}} />
-            <button className="btn withdraw-button" onClick={handleWithdrawal}>Withdraw</button>
+            <button className="btn withdraw-button" onClick={confirmWithdrawal}>Withdraw</button>
+            { withdrawMessage.error ? <p className="withdrawal-error">{withdrawMessage.error}</p> : "" }
+            { withdrawMessage.success ? <p className="withdrawal-success">{withdrawMessage.success}</p> : "" }
           </div>
 
         </div>
