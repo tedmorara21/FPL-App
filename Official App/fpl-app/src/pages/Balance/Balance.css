@@ -89,3 +89,51 @@ input {
    font-size: 18px;
    color: #555;
 }
+
+.payment-error {
+   color: red;
+   font-weight: bold;
+   text-align: left;
+}
+
+.payment-success {
+   color: #28a745;
+   font-weight: bold;
+   text-align: left;
+}
+
+.withdrawal-error {
+   color: red;
+   font-weight: bold;
+   text-align: left;
+}
+
+.withdrawal-success {
+   color: #28a745;
+   font-weight: bold;
+   text-align: left;
+}
+
+.modal{
+   flex: auto;
+}
+
+.modal-text{
+   font-size: 18px;
+   font-weight: bold;
+   font-family: 'Times New Roman', Times, serif;
+}
+
+.modal-button{
+   border: solid 1px black;
+}
+
+.yes-btn {
+   background-color:#19ce43;
+   margin: 5px;
+}
+
+.no-btn {
+   background-color: red;
+   margin: 5px;
+}
