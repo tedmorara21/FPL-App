@@ -17,7 +17,7 @@ const Balance = () => {
   const [ withdrawable, setWithdrawable ] = useState(0);
 
   const [ paymentMessage, setPaymentMessage ] = useState({ error: null, success: null });
-  const [ withdrawMessage, setWithdrawtMessage ] = useState({ error: null, success: null });
+  const [ withdrawMessage, setWithdrawMessage ] = useState({ error: null, success: null });
   
   const [ showConfirmDialog, setShowConfirmDialog ] = useState(false);
 
