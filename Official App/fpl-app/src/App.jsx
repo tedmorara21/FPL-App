@@ -29,10 +29,10 @@ function App() {
       <div className="app-container">
 
       {/* Sidebar */}
-      {showSidebar && <Sidebar />}
+      { showSidebar ? <Sidebar /> : null }
 
       {/* Main Content */}
-      <div className="main-content">
+      <div className={`main-content ${ showSidebar ? "with-sidebar" : "full-width" }`}>
 
         <Routes>
           {/* Public Routes */}
