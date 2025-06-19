@@ -33,12 +33,20 @@
   padding-bottom: 20px;
   padding-left: 60px;
   padding-right: 20px;
-  margin-left: 16%; /* Matches sidebar width */
+  /* margin-left: 16%;  Matches sidebar width */
   background-color: #f4f4f4;
   border-radius: 10px;
   box-sizing: border-box;
 
   overflow-y: auto; /* Allows scrolling if content overflows */
+}
+
+.width-sidebar {
+  margin-left: 16%:
+}
+
+.full-width {
+  margin-left: 0;
 }
 
 @keyframes logo-spin {
