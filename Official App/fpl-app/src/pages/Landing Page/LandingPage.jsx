@@ -29,6 +29,7 @@ const LandingPage = () => {
       const checkServer = async () => {
          try {
             await axios.get("https://fpl-proxy-server.onrender.com/api/users");
+            await axios.get("https://fpl-proxy-server.onrender.com/api/league");
          } catch (error) {
             setServerDown(true);
          }
@@ -74,7 +75,7 @@ const LandingPage = () => {
    }
 
    return (
-      <div className='landing-container'>
+      <div className="landing-container">
          <h1>Welcome To FPL</h1>
 
          <div className='input-group'>
@@ -89,6 +90,7 @@ const LandingPage = () => {
                   if (e.target.value !== "") setInputError("");
                }}
                placeholder='Enter team name as it is in FPL'
+               disabled={ loading || loginSuccess }
             />
          </div>
 
@@ -104,6 +106,7 @@ const LandingPage = () => {
                   if (e.target.value !== "") setInputError("");
                }}
                placeholder='Enter your password'
+               disabled={ loading || loginSuccess }
             />
 
             {errorMessage}
@@ -114,13 +117,16 @@ const LandingPage = () => {
          <div className="button-group">
             <button 
                onClick={ handleLogin }
-               className={ loading? "loading-button" : "" }
-               disabled={ loading }
+               className={ loading ? "loading-button" : "" }
+               disabled={ loading || loginSuccess }
             >{ loading? "Loading..." : "Login" }
             </button>
 
             <Link to="/new-registration">
-               <button>Register</button>
+               <button
+                  className={ loading ? "loading-button" : "" }
+                  disabled={ loading || loginSuccess }
+               >Register</button>
             </Link>
          </div>
 
