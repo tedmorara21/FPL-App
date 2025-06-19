@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+
+import "normalize.css" // normalize styles for multiple browsers
 import './App.css'
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 
