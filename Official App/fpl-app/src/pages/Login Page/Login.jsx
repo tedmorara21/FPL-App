@@ -11,7 +11,7 @@ const Login = () => {
    const navigate = useNavigate();
 
    const handleLogout = () => {
-      localStorage.removeItem("authTOken");
+      localStorage.removeItem("authToken");
       navigate("/");
    }
 
