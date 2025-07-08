@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import axios from "axios";
 
 import { UserContext } from "../../assets/UserContext";
-import { handleWithdrawalCost } from "../../functions/handle-withdrawal-cost.js";  
+import { handleWithdrawalCost } from "../../utils/handle-withdrawal-cost.js";  
 
 import "../Balance/Balance.css";
 
@@ -28,40 +28,41 @@ const Balance = () => {
     
     if (Number(amount_to_pay) !== 100) {
       setPaymentMessage({ error: "You can only pay 100!", success: null});
-      setTimeout( () => setPaymentMessage({ error: null, success: null }), 1500 );
+      setTimeout( () => setPaymentMessage({ error: null, success: null }), 2000 );
     } else {
       // CONTINUE WITH PAYMENT LOGIC
       try {
-        axios.post("https://fpl-proxy-server.onrender.com/mpesa-api/stk-push", {
+        axios.post("http://localhost:5001/mpesa-api/stk-push", { // CHANGE LATER!!!!!!!!!!!!!!!!!!
           phoneNumber: phone_number,
           amount: amount_to_pay
         });
         
         setPaymentMessage({ success: "Check your phone to complete transaction", error: null });
-        setTimeout( () => setPaymentMessage({ success: null, error: null }), 2500 )
+        setTimeout( () => setPaymentMessage({ success: null, error: null }), 3500 )
       } catch (err) {
         setPaymentMessage({ error: "Payment Failed. Try again", success: null });
-        setTimeout( () => setPaymentMessage({ success: null, error: null }), 2500 )
+        setTimeout( () => setPaymentMessage({ success: null, error: null }), 2000 )
       }
     }
   }
 
+  /* MOVE LOGIC TO BACKEND */
   const confirmWithdrawal = () => {
     if ( userData.balance <=0 ) {
-      setWithdrawMesssage({ error: "You don't have money! Improve your game", success: null });
-      setTimeout( () => setWithdrawMessage({ success: null, error: null }) );
+      setWithdrawMessage({ error: "You don't have money!", success: null });
+      setTimeout( () => setWithdrawMessage({ success: null, error: null }), 2000 );
       return;
     }
 
     if ( amount_to_withdraw <=0 ) {
       setWithdrawMessage({ error: "Please enter a valid amount", success: null });
-      setTimeout( () => setWithdrawMessage({ success: null, error: null }), 1500 );
+      setTimeout( () => setWithdrawMessage({ success: null, error: null }), 2000 );
       return;
     }
 
     if ( amount_to_withdraw > userData.balance ) {
       setWithdrawMessage({ error: "Cannot withdraw more than your balance", success: null });
-      setTimeout( () => setWithdrawMessage({ success: null, error: null }), 1500 );
+      setTimeout( () => setWithdrawMessage({ success: null, error: null }), 2000 );
       return;
     }
 
@@ -77,7 +78,7 @@ const Balance = () => {
 
     await getWithdrawalCostandAmount();
 
-    // PROCEED WITH WITHDRAWAL LOGIC HERE
+    /* PROCEED WITH WITHDRAWAL LOGIC HERE */
     setWithdrawMessage({ success: `Credited shs ${withdrawable} to ${userData.phone_number}`, error: null });
     setTimeout( () => setWithdrawMessage({ success: null, error: null }), 3500 );
   };
@@ -131,6 +132,7 @@ const Balance = () => {
           <p>Total Money Earned: <strong>{userData.money_earned}</strong> </p>
           <p>GW Points: <strong>{userData.gw_points}</strong> </p>
           <p>Total Points: <strong>{userData.total_points}</strong> </p>
+          <p>Phone Number: <strong>{userData.phone_number}</strong> </p>
         </div>
 
         <div className="balance-actions">
