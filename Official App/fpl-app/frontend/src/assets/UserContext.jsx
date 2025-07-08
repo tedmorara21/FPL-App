@@ -15,27 +15,30 @@ export const UserProvider = ( {children} ) => {
          }
 
          try {
-            const response1 = await axios.get("https://fpl-proxy-server.onrender.com/api/get-user-details", {
+            /* GET USER DETAILS */
+            const response1 = await axios.get("http://localhost:5001/api/get-user-details", {  // CHANGE LATER!!!!!!!!!!!!!!!!!!
                headers: { Authorization: `Bearer ${token}` },
             });
 
-            const responseDetails = response1.data.user;
-            // console.log("Response Details: ", responseDetails); // object
+            const responseDetails = response1.data.user; // OBJECT
 
-            const response2 = await axios.get("https://fpl-proxy-server.onrender.com/api/league");
+            /* GET FPL LEAGUE STANDINGS */
+            const response2 = await axios.get("http://localhost:5001/api/league"); // CHANGE LATER!!!!!!!!!!!!!!!!!!
+            const standingsArray = response2.data.standings.results; // object
 
-            const standingsArray = response2.data.standings.results;
-            //console.log("Stndings Array: ", standingsArray); //object
-
-            const currentUserStanding = standingsArray.find( (entry) => entry.player_name === responseDetails.playerName )
+            /* FIND USER IN LEAGUE STANDINGS USING FPL ID */
+            const currentUserStanding = standingsArray.find( 
+               (entry) => entry.entry === responseDetails.fpl_id
+            );
 
             if (!currentUserStanding) {
-               console.log("Player not fuond in FPL standings: ", responseDetails.playerName);
+               console.log("Player not found in FPL standings: ", responseDetails.playerName);
                return;
             }
 
             const userData = {
-               user_id: responseDetails.id,
+               fpl_id: responseDetails.fpl_id,
+               user_name: responseDetails.userName,
                player_name: responseDetails.playerName,
                team_name: responseDetails.teamName,
                email: responseDetails.email,
