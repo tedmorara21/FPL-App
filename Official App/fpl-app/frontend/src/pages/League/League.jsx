@@ -14,20 +14,19 @@ const League = () => {
   const [ loading, setLoading ] = useState(true);
 
   useEffect( () => {
-    let isMounted = true; // Prevent state update after unmounting
+    let isMounted = true; /* PREVENT STATE UPDATE AFTER UNMOUNTING */
 
     const fetchData = async () => {
         const data = await getLeagueStandings();
-        // console.log("Fetched Users: " , data);  // Debugging
         if (isMounted) {
-          setUsers(data); // Set correct users data
+          setUsers(data); /* SET CORRECT USERS DATA */
           setLoading(false);
         }
     }
 
     fetchData();
 
-    return () => { isMounted = false; }; // Cleanup
+    return () => { isMounted = false; }; /* CLEANUP */
   }, [] );
 
   if (loading) return <p>Loading league data...</p> 
