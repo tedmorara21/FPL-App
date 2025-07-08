@@ -96,5 +96,6 @@
 
  .successful-message {
   color: rgb(2, 173, 59);
+  cursor: not-allowed;
  }
  
