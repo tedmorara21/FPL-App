@@ -28,8 +28,8 @@ const LandingPage = () => {
    useEffect ( () => {
       const checkServer = async () => {
          try {
-            await axios.get("https://fpl-proxy-server.onrender.com/api/users");
-            await axios.get("https://fpl-proxy-server.onrender.com/api/league");
+            await axios.get("http://localhost:5001/api/users"); // CHANGE LATER !!!!!!!!!
+            await axios.get("http://localhost:5001/api/league"); // CHANGE LATER !!!!!!!!
          } catch (error) {
             setServerDown(true);
          }
@@ -75,7 +75,7 @@ const LandingPage = () => {
    }
 
    return (
-      <div className="landing-container">
+         <div className={"landing-container"}>
          <h1>Welcome To FPL</h1>
 
          <div className='input-group'>
@@ -123,14 +123,14 @@ const LandingPage = () => {
             </button>
 
             <Link to="/new-registration">
-               <button
+               <button 
                   className={ loading ? "loading-button" : "" }
                   disabled={ loading || loginSuccess }
                >Register</button>
             </Link>
          </div>
 
-      </ div>
+         </ div>
    )
 }
 
