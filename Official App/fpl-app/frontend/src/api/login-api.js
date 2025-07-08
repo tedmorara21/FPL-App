@@ -1,21 +1,20 @@
 import axios from "axios";
 
-const API_URL = "https://fpl-proxy-server.onrender.com/api/login";
+const API_URL = "http://localhost:5001/api/login"; // CHANGE LATER !!!!!!!!!!!!!!!!!!!
 
-export const loginToApp = async ( player_name, password ) => {
+export const loginToApp = async ( user_name, password ) => {  
    try {
       const response = await axios.post(API_URL, {
-         playerName: player_name,
+         userName: user_name,
          password: password
-      })
+      });
 
       return {
          validity: true,
-         user: response.data.user,
-         user_name: response.data.user.playerName,
          message: response.data.message,
          token: response.data.token,
-         decodedToken: response.data.decodedToken
+         decodedToken: response.data.token,
+         id: response.data.decodedToken.fpl_id
       }
    } catch (err) {
       return {
