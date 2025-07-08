@@ -13,11 +13,7 @@ const Dashboard = () => {
   const { userData } = useContext(UserContext);
 
   if (!userData) {
-    return (
-      <p>
-        Loading...
-      </p>
-    )
+    return <p> Loading... </p>
   }
 
    return (
@@ -28,7 +24,7 @@ const Dashboard = () => {
 
        <h1>DASHBOARD</h1>
 
-       <div className="dashboard-welcome">Welcome to your dashboard <span className="highlight"> {userData.team_name} </span>!</div>
+       <div className="dashboard-welcome">Welcome to your dashboard <span className="highlight"> {userData.user_name} </span>!</div>
 
         <ProfileHeader />
 
