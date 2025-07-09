@@ -68,7 +68,7 @@ const Settings = () => {
     }
 
     try {
-      const url = "http://localhost:5001/api/change-username"; /* REPLACE LATER */
+      const url = "https://fpl-proxy-server.onrender.com/api/change-username"; 
       const token = localStorage.getItem("authToken");
 
       const response = await axios.put( 
@@ -105,7 +105,7 @@ const Settings = () => {
       setPhoneError("");
       
       try {
-        const url = "http://localhost:5001/api/change-phone-number" // CHANGE LATER !!!!!!!!!!!!!!!
+        const url = "https://fpl-proxy-server.onrender.com/api/change-phone-number" 
         const token = localStorage.getItem("authToken");
 
         const response = await axios.put( url, { newPhoneNumber: phoneNumber }, 
@@ -139,7 +139,7 @@ const Settings = () => {
     try {
         setPasswordError("");
 
-        const url = "http://localhost:5001/api/change-password";
+        const url = "https://fpl-proxy-server.onrender.com/api/change-password";
         const token = localStorage.getItem("authToken");
 
         const response = await axios.put( 

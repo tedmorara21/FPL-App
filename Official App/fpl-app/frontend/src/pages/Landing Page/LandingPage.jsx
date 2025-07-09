@@ -28,8 +28,8 @@ const LandingPage = () => {
    useEffect ( () => {
       const checkServer = async () => {
          try {
-            await axios.get("http://localhost:5001/api/users"); // CHANGE LATER !!!!!!!!!
-            await axios.get("http://localhost:5001/api/league"); // CHANGE LATER !!!!!!!!
+            await axios.get("https://fpl-proxy-server.onrender.com/api/users"); 
+            await axios.get("https://fpl-proxy-server.onrender.com/api/league"); 
          } catch (error) {
             setServerDown(true);
          }

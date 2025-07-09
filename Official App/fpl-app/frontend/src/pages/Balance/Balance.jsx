@@ -32,7 +32,7 @@ const Balance = () => {
     } else {
       // CONTINUE WITH PAYMENT LOGIC
       try {
-        axios.post("http://localhost:5001/mpesa-api/stk-push", { // CHANGE LATER!!!!!!!!!!!!!!!!!!
+        axios.post("https://fpl-proxy-server.onrender.com/mpesa-api/stk-push", { 
           phoneNumber: phone_number,
           amount: amount_to_pay
         });

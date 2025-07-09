@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5001/api/login"; // CHANGE LATER !!!!!!!!!!!!!!!!!!!
+const API_URL = "https://fpl-proxy-server.onrender.com/api/login";
 
 export const loginToApp = async ( user_name, password ) => {  
    try {

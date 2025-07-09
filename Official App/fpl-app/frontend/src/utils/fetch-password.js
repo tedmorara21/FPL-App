@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const fetchPassword = async (playerName) =>  {
     try {
-        const response = await axios.get("http://localhost:5001/api/users"); // CHANGE LATER!!!!!!!!!!!!!!!!!!
+        const response = await axios.get("https://fpl-proxy-server.onrender.com/api/users"); 
         const users = response.data;
 
         const user = users.find( (user) => user.playerName === playerName );
@@ -13,7 +13,7 @@ export const fetchPassword = async (playerName) =>  {
             return null;
         }
     } catch (err) {
-        console.log("Error fetcching password: ", err);
+        console.log("Error fetching password: ", err);
         return null;
     }
 }

@@ -16,14 +16,14 @@ export const UserProvider = ( {children} ) => {
 
          try {
             /* GET USER DETAILS */
-            const response1 = await axios.get("http://localhost:5001/api/get-user-details", {  // CHANGE LATER!!!!!!!!!!!!!!!!!!
+            const response1 = await axios.get("https://fpl-proxy-server.onrender.com/api/get-user-details", {  
                headers: { Authorization: `Bearer ${token}` },
             });
 
             const responseDetails = response1.data.user; // OBJECT
 
             /* GET FPL LEAGUE STANDINGS */
-            const response2 = await axios.get("http://localhost:5001/api/league"); // CHANGE LATER!!!!!!!!!!!!!!!!!!
+            const response2 = await axios.get("https://fpl-proxy-server.onrender.com/api/league"); 
             const standingsArray = response2.data.standings.results; // object
 
             /* FIND USER IN LEAGUE STANDINGS USING FPL ID */

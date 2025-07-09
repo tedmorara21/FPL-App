@@ -38,7 +38,7 @@ const NewRegistration = () => {
 
       // CHECK IF PLAYERNAME EXISTS IN DATABASE
       try {
-         const response = await fetch("http://localhost:5001/api/league"); // CHANGE LATER!!!!!!!!!!!!!!!!!!
+         const response = await fetch("https://fpl-proxy-server.onrender.com/api/league"); 
          const data = await response.json();
 
          const leagueTeams = data.standings.results;
@@ -66,7 +66,7 @@ const NewRegistration = () => {
 
             //SEND DATA TO MONGODB HERE
             try {
-               const res = await fetch("http://localhost:5001/api/users", { // CHANGE LATER!!!!!!!!!!!!!!!!!!
+               const res = await fetch("https://fpl-proxy-server.onrender.com/api/users", { 
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify( { playerName, email, phoneNumber, password} ) 

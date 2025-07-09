@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5001/api/league"; //  CHANGE LATER!!!!!!!!!!!!!!!!!!!!!
+const API_URL = "https://fpl-proxy-server.onrender.com/api/league"; 
 
 
 export const getLeagueStandings = async () => {
