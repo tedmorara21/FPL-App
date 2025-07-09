@@ -1,0 +1,101 @@
+.landing-container {
+   max-width: 400px;
+   margin: 80px auto;
+   padding: 30px;
+   background-color: #ffffff;
+   border-radius: 10px;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+   text-align: center;
+ }
+ 
+ .landing-container h1 {
+   margin-bottom: 30px;
+   color: #333333;
+   font-size: 28px;
+ }
+ 
+ .input-group {
+   margin-bottom: 20px;
+   text-align: left;
+ }
+ 
+ .input-group label {
+   display: block;
+   margin-bottom: 8px;
+   font-weight: 600;
+   color: #555555;
+ }
+ 
+ .input-group input {
+   width: 100%;
+   padding: 10px;
+   border: 1px solid #cccccc;
+   border-radius: 5px;
+   font-size: 16px;
+ }
+ 
+ .button-group {
+   display: flex;
+   justify-content: space-between;
+   margin-top: 20px;
+ }
+ 
+ .button-group button {
+   flex: 1;
+   padding: 10px 15px;
+   margin: 0 5px;
+   font-size: 16px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+ }
+
+ .button-group button.loading-button {
+  background-color: #6c757d !important; /* Grey background */
+  width: 100% !important;
+  padding: 12px 20px;
+  font-weight: bold;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+ 
+ .button-group button:hover {
+   opacity: 0.9;
+ }
+ 
+ .button-group .register-button {
+   background-color: #6c757d;
+   color: #ffffff;
+ }
+ 
+ .button-group button:not(.register-button) {
+   background-color: #007bff;
+   color: #ffffff;
+ }
+ 
+ .error-message {
+   color: #dc3545;
+   margin-top: 10px;
+   font-size: 14px;
+ }
+
+ .input-error {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+ }
+
+ .loading-button {
+  background-color: #6c757d; /* Optional: makes it look "disabled" */
+  width: 100% !important;    /* Make it wider */
+  padding: 12px 20px;
+  font-weight: bold;
+  cursor: not-allowed;
+  opacity: 0.8;  
+ }
+
+ .successful-message {
+  color: rgb(2, 173, 59);
+  cursor: not-allowed;
+ }
+ 

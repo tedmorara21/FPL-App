@@ -1,0 +1,27 @@
+.league-body {
+   position: relative;   /* This is important */
+   width: 100%;          /* Takes full width of the dashboard (not page) */
+   text-align: center;
+   font-size: 20px;
+   margin-top: 10px;
+ }
+
+ .league-table-container {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 0 auto;
+ }
+
+ table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  min-width: 600px;
+ }
+
+ th, td {
+  padding: 0px 10px;
+  text-align: center;
+  white-space: nowrap;
+ }
+ 
