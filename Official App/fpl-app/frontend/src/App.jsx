@@ -4,7 +4,7 @@ import './App.css'
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 
 import ProtectedRoute from "./components/ProtectedRoutes.jsx";
-import AdminRoute from './components/AdminRoute.jsx';
+import AdminRoute from './components/AdminRoutes.jsx';
 
 import { UserProvider } from "./assets/UserContext.jsx";
 
