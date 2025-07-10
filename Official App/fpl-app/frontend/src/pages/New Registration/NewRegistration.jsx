@@ -74,8 +74,7 @@ const NewRegistration = () => {
 
                if (!res.ok) {
                   const errorData = await res.json();
-                  setErrorMessage(`Registration failed: ${errorData.error}`);
-                  console.log("Error by Guzuuu: ", errorData );
+                  setErrorMessage(`Registration failed: ${errorData.message}`);
                   setTimeout( () => setErrorMessage(""), 2000 );
                   return;
                }
